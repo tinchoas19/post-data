@@ -7,15 +7,16 @@ import { ManageProvider } from '../../providers/manage/manage';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  public ble: Respuesta;
   constructor(public navCtrl: NavController, private manage: ManageProvider) {
 
   }
 
   hacer() {
     this.convertToDataURLviaCanvas('https://thumbs2.ebaystatic.com/d/l225/m/meq1dL2LagH7im1peY0JtkQ.jpg', "image/jpg")
-      .then(base64Img => {
-        this.manage.saveImage(2, base64Img);
+      .then(base64Img => {        
+        this.ble = this.manage.saveImage( base64Img,2);
+        this.ble.envio = this.ble.envio; 
       })
   }
 
@@ -38,4 +39,9 @@ export class HomePage {
       img.src = url;
     });
   }
+}
+
+export interface Respuesta {
+  envio: any;
+  result: any;  
 }

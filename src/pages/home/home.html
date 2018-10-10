@@ -11,4 +11,12 @@
   <p>
    <button (click)="hacer()">HACERRRRRR</button>
   </p>
+  <p>Envio</p>
+  <p *ngIf="ble">
+    {{ble.envio}}
+  </p>
+  <p>Resultado</p>
+  <p *ngIf="ble">
+    {{ble.result}}
+  </p>
 </ion-content> 

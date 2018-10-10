@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Respuesta } from '../../pages/home/home';
 /*
   Generated class for the ManageProvider provider.
 
@@ -10,11 +11,12 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class ManageProvider {
  
+ 
 
   constructor(public http: Http) {
     console.log('Hello ManageProvider Provider');
   }
-  saveImage(image, idempleado) {
+  saveImage(image, idempleado): Respuesta {
 
     var url = "http://ctrlztest.com.ar/unilever/api/guardarfoto.php";
 
@@ -32,13 +34,19 @@ export class ManageProvider {
 
     var senderBody = JSON.stringify(body);
 
+
     
     let req = this.http.post(url, senderBody, requestOptions);
-
+    let ble;
     req.subscribe((res) => {
+      ble = res;
       console.log(res)
     }, (err) => {
+      ble = err;
+
       console.log(err);
     })
+    return {envio: senderBody, result: ble};
   }
 }
+
